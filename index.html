@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORGE & FORM | Elite Fitness Atelier</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;600&family=Bebas+Neue&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">FORGE<span>&</span>FORM</div>
+            <div class="nav-links">
+                <a href="#membership">PASSES</a>
+                <a href="#coaching">COACHING</a>
+                <a href="#gallery">GALLERY</a>
+                <div class="bag-pill" onclick="toggleBag(true)">
+                    <span>BAG</span>
+                    <div id="bag-count">0</div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <p>REDEFINING HUMAN POTENTIAL</p>
+            <h1>FORGE YOUR<br><span class="accent">LEGACY</span></h1>
+        </div>
+    </section>
+
+    <section id="membership" class="container">
+        <div class="section-header">
+            <span class="num">01</span>
+            <h2>ACCESS PASSES</h2>
+        </div>
+        <div id="membership-list" class="grid-products"></div>
+    </section>
+
+    <section id="coaching" class="container">
+        <div class="section-header">
+            <span class="num">02</span>
+            <h2>ELITE COACHING</h2>
+        </div>
+        <div id="coaching-list" class="grid-products"></div>
+    </section>
+
+    <section id="gallery" class="container">
+        <div class="section-header">
+            <span class="num">03</span>
+            <h2>THE ATELIER</h2>
+            <p id="gallery-info" class="gallery-info-text"></p>
+        </div>
+        <div class="gallery-scroll-area">
+            <div id="gallery-list" class="fixed-gallery-grid"></div>
+        </div>
+    </section>
+
+    <div id="side-bag" class="side-bag">
+        <div class="bag-header">
+            <div class="bag-title-area">
+                <h3>YOUR SELECTION</h3>
+                <span id="bag-item-qty">0 ITEMS</span>
+            </div>
+            <span class="close-bag" onclick="toggleBag(false)">&times;</span>
+        </div>
+        <div id="bag-items-list" class="bag-items"></div>
+        <div class="bag-footer">
+            <div class="bag-total-row">
+                <span>SUBTOTAL</span>
+                <span id="bag-total-price">Rp 0</span>
+            </div>
+            <p class="bag-disclaimer">TAXES AND CONFIRMATION HANDLED AT CHECKOUT.</p>
+            <button class="checkout-btn" onclick="checkout()">PROCEED TO CHECKOUT</button>
+        </div>
+    </div>
+    <div id="bag-overlay" onclick="toggleBag(false)"></div>
+
+    <div id="payment-modal" class="modal-overlay">
+        <div class="luxury-modal">
+            <div class="modal-line"></div>
+            <span class="step-tag">FINAL STEP</span>
+            <h2>SECURE PAYMENT</h2>
+            
+            <div class="bank-card-minimal">
+                <p class="bank-label">TRANSFER TO BCA</p>
+                <div class="copy-area" onclick="copyToClipboard()">
+                    <h3 id="acc-number">1234 567 890</h3>
+                    <p id="copy-status">COPIED TO CLIPBOARD</p>
+                </div>
+                <p class="bank-holder">FORGE & FORM ATELIER</p>
+            </div>
+
+            <div class="total-box">
+                <span>TOTAL BILL</span>
+                <h1 id="final-amount">Rp 0</h1>
+            </div>
+
+            <div class="modal-btns">
+                <button class="btn-confirm" onclick="sendConfirmation('wa')">CONFIRM VIA WHATSAPP</button>
+                <button class="btn-close-text" onclick="closePayment()">BACK TO SITE</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="elite-footer">
+        <div class="f-container">
+            <div class="f-main-info">
+                <div class="logo">FORGE<span>&</span>FORM</div>
+                <p class="f-tagline">Redefining human potential through elite fitness architecture. Join the movement and forge your legacy.</p>
+                <div class="f-socials">
+                    <a href="#">INSTAGRAM</a>
+                    <a href="#">TIKTOK</a>
+                    <a href="#">YOUTUBE</a>
+                </div>
+            </div>
+            <div class="f-grid-links">
+                <div class="f-col">
+                    <h4>ATELIER</h4>
+                    <a href="#membership">Access Passes</a>
+                    <a href="#coaching">Elite Coaching</a>
+                    <a href="#gallery">The Gallery</a>
+                </div>
+                <div class="f-col">
+                    <h4>CONNECT</h4>
+                    <p>Jl. Jendral Sudirman No. 88, Jakarta</p>
+                    <p>atelier@forgeform.id</p>
+                    <p>+62 812 3456 7890</p>
+                </div>
+                <div class="f-col">
+                    <h4>HOURS</h4>
+                    <p>MON - FRI / 06:00 - 22:00</p>
+                    <p>SAT - SUN / 08:00 - 20:00</p>
+                </div>
+            </div>
+        </div>
+        <div class="f-bottom">
+            <p>© 2025 FORGE & FORM ATELIER. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
