@@ -1,163 +1,146 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FORGE | Admin Central</title>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Bebas+Neue&family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root { --accent: #ffae00; --bg: #000; --card: #0d0d0d; --border: #1a1a1a; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-
-        /* Login Screen */
-        #auth-screen { position: fixed; inset: 0; background: #000; z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 20px; }
-        .auth-box { background: var(--card); border: 1px solid var(--border); padding: 40px; width: 100%; max-width: 400px; text-align: center; }
-        .auth-box h1 { font-family: 'Bebas Neue'; font-size: 2.5rem; margin-bottom: 30px; }
-        .auth-box span { color: var(--accent); }
-
-        /* Dashboard */
-        #dashboard { display: none; padding: 30px 5%; }
-        header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--accent); padding-bottom: 20px; margin-bottom: 30px; }
-        .logo { font-family: 'Bebas Neue'; font-size: 2rem; }
-        .btn-logout { background: #ff4444; border: none; color: #fff; padding: 10px 15px; cursor: pointer; font-family: 'Oswald'; }
-
-        /* Layout Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
-        .panel { background: var(--card); border: 1px solid var(--border); padding: 25px; }
-        h2 { font-family: 'Oswald'; font-size: 1.2rem; color: var(--accent); margin-bottom: 20px; text-transform: uppercase; border-left: 3px solid var(--accent); padding-left: 10px; }
-
-        /* Input & Table */
-        .form-group { margin-bottom: 15px; text-align: left; }
-        label { display: block; font-size: 0.7rem; color: #666; margin-bottom: 5px; }
-        input, select, textarea { width: 100%; background: #050505; border: 1px solid #222; padding: 12px; color: #fff; }
-        .btn-main { width: 100%; background: var(--accent); color: #000; border: none; padding: 15px; font-family: 'Oswald'; font-weight: bold; cursor: pointer; margin-top: 10px; }
-
-        /* Order Table */
-        .order-container { margin-top: 40px; background: var(--card); border: 1px solid var(--border); padding: 20px; overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
-        th { background: #111; color: var(--accent); text-align: left; padding: 12px; font-family: 'Oswald'; }
-        td { padding: 12px; border-bottom: 1px solid #1a1a1a; }
-        .status-badge { background: #ffae0022; color: var(--accent); padding: 4px 8px; border-radius: 4px; font-weight: bold; }
-    </style>
+    <title>FORGE & FORM | Elite Fitness Atelier</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;600&family=Bebas+Neue&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div id="auth-screen">
-        <div class="auth-box">
-            <h1 id="atitle">FORGE<span>LOGIN</span></h1>
-            <div class="form-group"><label>Username</label><input type="text" id="auser"></div>
-            <div class="form-group"><label>Password</label><input type="password" id="apass"></div>
-            <button class="btn-main" id="abtn" onclick="handleAuth()">SIGN IN</button>
-            <span style="margin-top:20px; display:block; cursor:pointer; font-size:0.8rem;" onclick="toggleAuth()">Akun baru? <b style="color:var(--accent)">SIGN UP</b></span>
-        </div>
-    </div>
-
-    <div id="dashboard">
-        <header>
-            <div class="logo">FORGE<span>CENTRAL</span></div>
-            <button class="btn-logout" onclick="logout()">LOGOUT</button>
-        </header>
-
-        <div class="grid">
-            <div class="panel">
-                <h2>Tambah Produk / Coaching</h2>
-                <div class="form-group"><label>Nama Item</label><input type="text" id="pNama"></div>
-                <div class="form-group"><label>Harga (Angka)</label><input type="number" id="pHarga"></div>
-                <div class="form-group"><label>Kategori</label>
-                    <select id="pKategori">
-                        <option value="Access Pass">Access Pass</option>
-                        <option value="Elite Coaching">Elite Coaching</option>
-                    </select>
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">FORGE<span>&</span>FORM</div>
+            <div class="nav-links">
+                <a href="#membership">PASSES</a>
+                <a href="#coaching">COACHING</a>
+                <a href="#gallery">GALLERY</a>
+                <div class="bag-pill" onclick="toggleBag(true)">
+                    <span>BAG</span>
+                    <div id="bag-count">0</div>
                 </div>
-                <div class="form-group"><label>Link Foto</label><input type="text" id="pImg"></div>
-                <div class="form-group"><label>Deskripsi</label><textarea id="pDesc"></textarea></div>
-                <button class="btn-main" onclick="saveData('addProduct')">PUBLISH PRODUCT</button>
-            </div>
-
-            <div class="panel">
-                <h2>Tambah Gallery</h2>
-                <div class="form-group"><label>Link Foto</label><input type="text" id="gImg"></div>
-                <div class="form-group"><label>Label</label><input type="text" id="gDesc"></div>
-                <button class="btn-main" style="background:#fff" onclick="saveData('addGallery')">UPLOAD PHOTO</button>
             </div>
         </div>
+    </nav>
 
-        <div class="order-container">
-            <h2>Data Pesanan Masuk</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>TANGGAL</th>
-                        <th>CUSTOMER</th>
-                        <th>WA</th>
-                        <th>ITEM</th>
-                        <th>TOTAL</th>
-                        <th>STATUS</th>
-                    </tr>
-                </thead>
-                <tbody id="order-list">
-                    </tbody>
-            </table>
+    <section class="hero">
+        <div class="hero-content">
+            <p>REDEFINING HUMAN POTENTIAL</p>
+            <h1>FORGE YOUR<br><span class="accent">LEGACY</span></h1>
+        </div>
+    </section>
+
+    <section id="membership" class="container">
+        <div class="section-header">
+            <span class="num">01</span>
+            <h2>ACCESS PASSES</h2>
+        </div>
+        <div id="membership-list" class="grid-products"></div>
+    </section>
+
+    <section id="coaching" class="container">
+        <div class="section-header">
+            <span class="num">02</span>
+            <h2>ELITE COACHING</h2>
+        </div>
+        <div id="coaching-list" class="grid-products"></div>
+    </section>
+
+    <section id="gallery" class="container">
+        <div class="section-header">
+            <span class="num">03</span>
+            <h2>THE ATELIER</h2>
+            <p id="gallery-info" class="gallery-info-text"></p>
+        </div>
+        <div class="gallery-scroll-area">
+            <div id="gallery-list" class="fixed-gallery-grid"></div>
+        </div>
+    </section>
+
+    <div id="side-bag" class="side-bag">
+        <div class="bag-header">
+            <div class="bag-title-area">
+                <h3>YOUR SELECTION</h3>
+                <span id="bag-item-qty">0 ITEMS</span>
+            </div>
+            <span class="close-bag" onclick="toggleBag(false)">&times;</span>
+        </div>
+        <div id="bag-items-list" class="bag-items"></div>
+        <div class="bag-footer">
+            <div class="bag-total-row">
+                <span>SUBTOTAL</span>
+                <span id="bag-total-price">Rp 0</span>
+            </div>
+            <p class="bag-disclaimer">TAXES AND CONFIRMATION HANDLED AT CHECKOUT.</p>
+            <button class="checkout-btn" onclick="checkout()">PROCEED TO CHECKOUT</button>
+        </div>
+    </div>
+    <div id="bag-overlay" onclick="toggleBag(false)"></div>
+
+    <div id="payment-modal" class="modal-overlay">
+        <div class="luxury-modal">
+            <div class="modal-line"></div>
+            <span class="step-tag">FINAL STEP</span>
+            <h2>SECURE PAYMENT</h2>
+            
+            <div class="bank-card-minimal">
+                <p class="bank-label">TRANSFER TO BCA</p>
+                <div class="copy-area" onclick="copyToClipboard()">
+                    <h3 id="acc-number">1234 567 890</h3>
+                    <p id="copy-status">COPIED TO CLIPBOARD</p>
+                </div>
+                <p class="bank-holder">FORGE & FORM ATELIER</p>
+            </div>
+
+            <div class="total-box">
+                <span>TOTAL BILL</span>
+                <h1 id="final-amount">Rp 0</h1>
+            </div>
+
+            <div class="modal-btns">
+                <button class="btn-confirm" onclick="sendConfirmation('wa')">CONFIRM VIA WHATSAPP</button>
+                <button class="btn-close-text" onclick="closePayment()">BACK TO SITE</button>
+            </div>
         </div>
     </div>
 
-    <script>
-        const GS_URL = "https://script.google.com/macros/s/AKfycbzFt4iRTwDzKemtooTlB6Mm7ZuOOBSwMibbgXZodzDnG-6FjD2UT4KBzhxet8UBUTzCvw/exec"; // GANTI!!
-        let isSignup = false;
-
-        window.onload = () => { if(localStorage.getItem("forge_ses")) showDash(); };
-
-        function toggleAuth() {
-            isSignup = !isSignup;
-            document.getElementById('atitle').innerHTML = isSignup ? "FORGE<span>SIGNUP</span>" : "FORGE<span>LOGIN</span>";
-            document.getElementById('abtn').innerText = isSignup ? "BUAT AKUN" : "SIGN IN";
-        }
-
-        async function handleAuth() {
-            const user = document.getElementById('auser').value;
-            const pass = document.getElementById('apass').value;
-            const action = isSignup ? "registerAdmin" : "loginAdmin";
-            const res = await fetch(GS_URL, {method:"POST", body:JSON.stringify({action, username:user, password:pass})});
-            const out = await res.json();
-            if(out.status === "success") { localStorage.setItem("forge_ses", user); showDash(); }
-            else { alert("Gagal Login/Daftar (Quota Full atau Salah)"); }
-        }
-
-        function showDash() {
-            document.getElementById('auth-screen').style.display = 'none';
-            document.getElementById('dashboard').style.display = 'block';
-            loadOrders();
-        }
-
-        async function saveData(action) {
-            const data = action === 'addProduct' ? {
-                action, nama: document.getElementById('pNama').value, harga: document.getElementById('pHarga').value,
-                kategori: document.getElementById('pKategori').value, img: document.getElementById('pImg').value, desc: document.getElementById('pDesc').value
-            } : { action, img: document.getElementById('gImg').value, desc: document.getElementById('gDesc').value };
-
-            const res = await fetch(GS_URL, {method:"POST", body:JSON.stringify(data)});
-            const out = await res.json();
-            if(out.status === "success") { alert("Berhasil!"); location.reload(); }
-        }
-
-        async function loadOrders() {
-            const res = await fetch(GS_URL + "?action=getOrders");
-            const orders = await res.json();
-            const list = document.getElementById('order-list');
-            list.innerHTML = orders.reverse().map(o => `
-                <tr>
-                    <td>${o.tanggal}</td>
-                    <td><b>${o.nama_customer}</b></td>
-                    <td><a href="https://wa.me/${o.whatsapp}" target="_blank" style="color:var(--accent)">${o.whatsapp}</a></td>
-                    <td>${o.item}</td>
-                    <td>Rp ${parseInt(o.total_harga).toLocaleString()}</td>
-                    <td><span class="status-badge">${o.status}</span></td>
-                </tr>
-            `).join('');
-        }
-
-        function logout() { localStorage.removeItem("forge_ses"); location.reload(); }
-    </script>
+   <footer class="elite-footer">
+    <div class="f-container">
+        <div class="f-main-info">
+            <div class="logo">FORGE<span>&</span>FORM</div>
+            <p class="f-tagline">Redefining human potential through elite fitness architecture. Join the movement and forge your legacy.</p>
+            <div class="f-socials">
+                <a href="#">INSTAGRAM</a>
+                <a href="#">TIKTOK</a>
+                <a href="#">YOUTUBE</a>
+            </div>
+        </div>
+        <div class="f-grid-links">
+            <div class="f-col">
+                <h4>ATELIER</h4>
+                <a href="#membership">Access Passes</a>
+                <a href="#coaching">Elite Coaching</a>
+                <a href="#gallery">The Gallery</a>
+            </div>
+            <div class="f-col">
+                <h4>CONNECT</h4>
+                <p>Jl. Jendral Sudirman No. 88, Jakarta</p>
+                <a href="mailto:atelier@forgeform.id" style="text-transform: lowercase; margin-bottom: 5px;">atelier@forgeform.id</a>
+                <a href="https://wa.me/6281234567890" target="_blank">+62 812 3456 7890</a>
+            </div>
+            <div class="f-col">
+                <h4>HOURS</h4>
+                <p>MON - FRI / 06:00 - 22:00</p>
+                <p>SAT - SUN / 08:00 - 20:00</p>
+            </div>
+        </div>
+    </div>
+    <div class="f-bottom">
+        <p>© 2025 FORGE & FORM ATELIER. ALL RIGHTS RESERVED.</p>
+        <a href="admin.html" style="color: #111; text-decoration: none; font-size: 0.6rem; margin-top: 15px; display: inline-block; opacity: 0.5;">SYSTEM ACCESS</a>
+    </div>
+</footer>
+    <script src="script.js"></script>
 </body>
 </html>
